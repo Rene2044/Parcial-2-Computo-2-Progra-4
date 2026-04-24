@@ -22,8 +22,8 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Si es exitoso, redirigimos al inicio
-            return redirect()->intended('/');
+            // CAMBIO: Ahora redirigimos al panel de inventario en lugar de la raíz
+            return redirect()->intended('/inventory');
         }
 
         // 3. Si falla, regresamos al login con un mensaje de error
@@ -38,6 +38,8 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        // Redirigimos al inicio (donde está el formulario de login) al cerrar sesión
         return redirect('/');
     }
 }
