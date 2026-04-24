@@ -1,7 +1,9 @@
+/* resources/css/login.css */
+
 :root {
-    --primary-color: #e63946; /* Rojo deportivo */
-    --bg-color: #1a1a2e;      /* Azul oscuro/gris */
-    --form-bg: #16213e;
+    --primary-color: #e63946; /* Rojo automotriz */
+    --bg-color: #1a1a2e;      /* Azul muy oscuro */
+    --form-bg: #16213e;      /* Fondo del contenedor */
     --text-color: #ffffff;
     --input-bg: #0f3460;
 }
@@ -44,11 +46,18 @@ p { color: #b3b3b3; margin-bottom: 2rem; font-size: 0.9rem; }
 .input-group input {
     width: 100%;
     padding: 12px;
-    border: none;
+    border: 1px solid #1f4068;
     border-radius: 6px;
     background-color: var(--input-bg);
     color: white;
-    box-sizing: border-box; /* Importante para el padding */
+    box-sizing: border-box;
+}
+
+/* Efecto al hacer clic en el input */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(230, 57, 70, 0.5);
 }
 
 .login-btn {
