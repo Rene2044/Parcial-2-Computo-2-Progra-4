@@ -4,22 +4,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VehicleController;
 
-// 1. Esta es la página principal que muestra tu formulario (welcome.blade.php)
+// 1. Página de inicio (Login)
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('login'); // Es buena práctica nombrar esta ruta también
 
 // --- RUTAS DE AUTENTICACIÓN ---
+// Ruta para procesar el Login
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-// Esta ruta solo muestra la vista (si tienes una vista separada en auth/login.blade.php)
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Ruta para cerrar sesión
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ¡IMPORTANTE! Aquí está la clave:
-// El nombre 'login' debe estar en la ruta POST, no en la GET.
-// Así, el formulario envía los datos aquí.
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+// --- PANEL DE INVENTARIO (PROTEGIDO) ---
+// Esta es la página a la que redirigiremos después del login
+Route::get('/inventory', function () {
+    return view('inventory');
+})->middleware('auth')->name('inventory');
 
 // --- RUTAS DE VEHÍCULOS ---
 
